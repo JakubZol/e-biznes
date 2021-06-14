@@ -18,7 +18,7 @@ class UserRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(implic
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
     def firstname = column[String]("firstname")
     def lastname = column[String]("lastname")
-    def login = column[String]("nickname")
+    def login = column[String]("login")
     def age = column[Int]("age")
 
     def * = (id, firstname, lastname, login, age) <> ((User.apply _).tupled, User.unapply)
