@@ -55,7 +55,7 @@ class HomeController @Inject()(productsRepo: ProductRepository, categoryRepo: Ca
 
   def updateProduct(id: Long): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
     var categ:Seq[Category] = Seq[Category]()
-    val categories = categoryRepo.list().onComplete{
+    categoryRepo.list().onComplete{
       case Success(cat) => categ = cat
       case Failure(_) => print("fail")
     }
@@ -71,7 +71,7 @@ class HomeController @Inject()(productsRepo: ProductRepository, categoryRepo: Ca
 
   def updateProductHandle = Action.async { implicit request =>
     var categ:Seq[Category] = Seq[Category]()
-    val categories = categoryRepo.list().onComplete{
+    categoryRepo.list().onComplete{
       case Success(cat) => categ = cat
       case Failure(_) => print("fail")
     }
@@ -99,7 +99,7 @@ class HomeController @Inject()(productsRepo: ProductRepository, categoryRepo: Ca
 
   def addProductHandle = Action.async { implicit request =>
     var categ:Seq[Category] = Seq[Category]()
-    val categories = categoryRepo.list().onComplete{
+    categoryRepo.list().onComplete{
       case Success(cat) => categ = cat
       case Failure(_) => print("fail")
     }
@@ -118,33 +118,6 @@ class HomeController @Inject()(productsRepo: ProductRepository, categoryRepo: Ca
     )
 
   }
-  /*
-    def addProduct = Action { implicit request: MessagesRequest[AnyContent] =>
-
-      var categ:Seq[Category] = Seq[Category]()
-      val categories = categoryRepo.list().onComplete{
-        case Success(cat) => categ = cat
-        case Failure(_) => print("fail")
-      }
-
-      val errorFunction = { productForm =>
-      // This is the bad case, where the form had validation errors.
-      // Let's show the user the form again, with the errors highlighted.
-      // Note how we pass the form with errors to the template.
-      BadRequest(views.html.productadd(productForm, categ))
-    }
-
-    val successFunction = { data: Product =>
-      // This is the good case, where the form was successfully parsed as a Data object.
-      productsRepo.create(data.name, data.description, data.category).map { _ =>
-        Redirect(routes.HomeController.addProduct()).flashing("success" -> "product.created")
-      }
-    }
-
-    val formValidationResult = productForm.bindFromRequest
-    formValidationResult.fold(errorFunction, successFunction)
-  }
-  */
 }
 
 case class CreateProductForm(name: String, description: String, category: Int)

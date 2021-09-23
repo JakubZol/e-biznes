@@ -38,8 +38,8 @@ class BallRepository  @Inject() (dbConfigProvider: DatabaseConfigProvider)(impli
 
   def delete(id: Long): Future[Unit] = db.run(ball.filter(_.id === id).delete).map(_ => ())
 
-  def update(id: Long, new_ball: Ball): Future[Unit] = {
-    val ballToUpdate: Ball = new_ball.copy(id)
+  def update(id: Long, newBall: Ball): Future[Unit] = {
+    val ballToUpdate: Ball = newBall.copy(id)
     db.run(ball.filter(_.id === id).update(ballToUpdate)).map(_ => ())
   }
 

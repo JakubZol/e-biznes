@@ -38,8 +38,8 @@ class HatRepository  @Inject() (dbConfigProvider: DatabaseConfigProvider)(implic
 
   def delete(id: Long): Future[Unit] = db.run(hat.filter(_.id === id).delete).map(_ => ())
 
-  def update(id: Long, new_hat: Hat): Future[Unit] = {
-    val hatToUpdate: Hat = new_hat.copy(id)
+  def update(id: Long, newHat: Hat): Future[Unit] = {
+    val hatToUpdate: Hat = newHat.copy(id)
     db.run(hat.filter(_.id === id).update(hatToUpdate)).map(_ => ())
   }
 

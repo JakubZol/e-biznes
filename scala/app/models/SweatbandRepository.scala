@@ -38,8 +38,8 @@ class SweatbandRepository  @Inject() (dbConfigProvider: DatabaseConfigProvider)(
 
   def delete(id: Long): Future[Unit] = db.run(sweatband.filter(_.id === id).delete).map(_ => ())
 
-  def update(id: Long, new_sweatband: Sweatband): Future[Unit] = {
-    val sweatbandToUpdate: Sweatband = new_sweatband.copy(id)
+  def update(id: Long, newSweatband: Sweatband): Future[Unit] = {
+    val sweatbandToUpdate: Sweatband = newSweatband.copy(id)
     db.run(sweatband.filter(_.id === id).update(sweatbandToUpdate)).map(_ => ())
   }
 

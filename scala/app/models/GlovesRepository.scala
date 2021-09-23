@@ -39,8 +39,8 @@ class GlovesRepository  @Inject() (dbConfigProvider: DatabaseConfigProvider)(imp
 
   def delete(id: Long): Future[Unit] = db.run(gloves.filter(_.id === id).delete).map(_ => ())
 
-  def update(id: Long, new_gloves: Gloves): Future[Unit] = {
-    val glovesToUpdate: Gloves = new_gloves.copy(id)
+  def update(id: Long, newGloves: Gloves): Future[Unit] = {
+    val glovesToUpdate: Gloves = newGloves.copy(id)
     db.run(gloves.filter(_.id === id).update(glovesToUpdate)).map(_ => ())
   }
 

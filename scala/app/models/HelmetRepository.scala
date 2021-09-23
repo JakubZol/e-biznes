@@ -39,8 +39,8 @@ class HelmetRepository  @Inject() (dbConfigProvider: DatabaseConfigProvider)(imp
 
   def delete(id: Long): Future[Unit] = db.run(helmet.filter(_.id === id).delete).map(_ => ())
 
-  def update(id: Long, new_helmet: Helmet): Future[Unit] = {
-    val helmetToUpdate: Helmet = new_helmet.copy(id)
+  def update(id: Long, newHelmet: Helmet): Future[Unit] = {
+    val helmetToUpdate: Helmet = newHelmet.copy(id)
     db.run(helmet.filter(_.id === id).update(helmetToUpdate)).map(_ => ())
   }
 
