@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const useFetch = (url, dependencies = []) => {
     const [status, setStatus] = useState(FETCH_STATUSES.IDLE);
-    const [data, setData] = useState([]);
+    const [responseData, setResponseData] = useState([]);
 
     useEffect(() => {
         axios({
@@ -16,14 +16,14 @@ const useFetch = (url, dependencies = []) => {
                 'Accept': 'application/json',
             }
         }).then(({ data }) => {
-            setData(data);
+            setResponseData(data);
             setStatus(FETCH_STATUSES.SUCCESS);
         }).catch(() => {
             setStatus(FETCH_STATUSES.FAILURE);
         });
     }, dependencies);
 
-    return { status, data };
+    return { status, data: responseData };
 };
 
 export default useFetch;

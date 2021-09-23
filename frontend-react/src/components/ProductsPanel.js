@@ -13,8 +13,8 @@ const ProductsPanel = ({ product, addItem }) => {
             {status === FETCH_STATUSES.IDLE && <h3>Pobieranie danych...</h3>}
             {status === FETCH_STATUSES.SUCCESS && productsList.length > 0 &&
                 <ul className="store__items">
-                    {productsList.map(product => (
-                        <Product product={product} addItem={addItem}/>
+                    {productsList.map(productData => (
+                        <Product product={productData} addItem={addItem}/>
                     ))}
                 </ul>
             }
