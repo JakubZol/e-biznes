@@ -5,7 +5,7 @@
 
 POST          /register                   controllers.AuthController.signUp
 POST          /login                      controllers.AuthController.signIn
-POST          /password/change            controllers.AuthController.changePassword
+GET            /users                       controllers.UserController.getUser
 
 GET           /                           controllers.HomeController.index
 GET           /addproduct                 controllers.HomeController.addProduct

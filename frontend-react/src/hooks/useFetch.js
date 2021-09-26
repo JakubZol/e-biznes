@@ -3,9 +3,9 @@ import { FETCH_STATUSES } from "../consts";
 import axios from 'axios';
 
 
-const useFetch = (url, dependencies = []) => {
+const useFetch = (url, dependencies = [], headers = {}) => {
     const [status, setStatus] = useState(FETCH_STATUSES.IDLE);
-    const [responseData, setResponseData] = useState([]);
+    const [responseData, setResponseData] = useState(undefined);
 
     useEffect(() => {
         axios({
@@ -14,11 +14,13 @@ const useFetch = (url, dependencies = []) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
+                ...headers
             }
         }).then(({ data }) => {
             setResponseData(data);
             setStatus(FETCH_STATUSES.SUCCESS);
         }).catch(() => {
+            setResponseData(undefined);
             setStatus(FETCH_STATUSES.FAILURE);
         });
     }, dependencies);
