@@ -1,14 +1,291 @@
-2021-09-20 18:45:52,611 [WARN] from slick.basic.DatabaseConfig in play-dev-mode-akka.actor.default-dispatcher-10 - Use `profile` instead of `driver`. The latter is deprecated since Slick 3.2 and will be removed.
-2021-09-20 18:45:53,035 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-10 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+2021-09-26 21:20:11,428 [WARN] from slick.basic.DatabaseConfig in play-dev-mode-akka.actor.default-dispatcher-4 - Use `profile` instead of `driver`. The latter is deprecated since Slick 3.2 and will be removed.
+2021-09-26 21:20:11,966 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-4 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     play.filters.csrf.CSRFFilter
     play.filters.headers.SecurityHeadersFilter
     play.filters.hosts.AllowedHostsFilter
-    filters.ExampleFilter
     play.filters.cors.CORSFilter
     filters.ExampleFilter
 
-2021-09-20 18:45:53,041 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-10 - Application started (Dev) (no global state)
-2021-09-21 01:10:39,820 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-shutdown-hook-1 - Stopping Akka HTTP server...
-2021-09-21 01:10:39,832 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-26 - Terminating server binding for /0:0:0:0:0:0:0:0:9000
-2021-09-21 01:10:39,928 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-26 - Running provided shutdown stop hooks
+2021-09-26 21:20:11,971 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-4 - Application started (Dev) (no global state)
+2021-09-26 21:28:15,714 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-41 - 
+
+! @7l75baeo7 - Internal server error, for (POST) [/register] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[type mismatch;
+ found   : ((Option[Long], String, String, String, Int, Option[String])) => models.User
+ required: ((Long, String, String, String, Int, Option[String])) => ?]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:32)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:32)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:39)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:34)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:34)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:27)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:62)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:62)
+	at scala.util.Either$LeftProjection.map(Either.scala:377)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:62)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$3.apply(PlayRun.scala:75)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$3.apply(PlayRun.scala:74)
+	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:496)
+	at play.runsupport.Reloader$$anon$5.run(Reloader.scala:57)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:52)
+	at play.runsupport.Reloader.reload(Reloader.scala:494)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:141)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:300)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:190)
+	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1289)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:541)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:423)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:624)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:501)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:599)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:768)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:783)
+	at akka.actor.Actor.aroundReceive(Actor.scala:534)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:532)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:690)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:573)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:543)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:269)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:230)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:242)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+2021-09-26 21:30:10,326 [WARN] from slick.basic.DatabaseConfig in play-dev-mode-akka.actor.default-dispatcher-48 - Use `profile` instead of `driver`. The latter is deprecated since Slick 3.2 and will be removed.
+2021-09-26 21:30:10,394 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-48 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.cors.CORSFilter
+    filters.ExampleFilter
+
+2021-09-26 21:30:10,397 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-48 - Application started (Dev) (no global state)
+2021-09-26 21:30:10,471 [ERROR] from play.api.http.DefaultHttpErrorHandler in application-akka.actor.default-dispatcher-6 - 
+
+! @7l75bh2l6 - Internal server error, for (POST) [/register] ->
+ 
+play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such table: main.users)]]
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:335)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:253)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:424)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:420)
+	at scala.concurrent.Future.$anonfun$recoverWith$1(Future.scala:417)
+	at scala.concurrent.impl.Promise.$anonfun$transformWith$1(Promise.scala:41)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:92)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:85)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:92)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:47)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:47)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+Caused by: org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such table: main.users)
+	at org.sqlite.core.DB.newSQLException(DB.java:941)
+	at org.sqlite.core.DB.newSQLException(DB.java:953)
+	at org.sqlite.core.DB.throwex(DB.java:918)
+	at org.sqlite.core.NativeDB.prepare_utf8(Native Method)
+	at org.sqlite.core.NativeDB.prepare(NativeDB.java:134)
+	at org.sqlite.core.DB.prepare(DB.java:257)
+	at org.sqlite.core.CorePreparedStatement.<init>(CorePreparedStatement.java:47)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.<init>(JDBC3PreparedStatement.java:30)
+	at org.sqlite.jdbc4.JDBC4PreparedStatement.<init>(JDBC4PreparedStatement.java:19)
+	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:35)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:241)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:205)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:311)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at slick.jdbc.JdbcBackend$SessionDef.prepareStatement(JdbcBackend.scala:375)
+	at slick.jdbc.JdbcBackend$SessionDef.prepareStatement$(JdbcBackend.scala:365)
+	at slick.jdbc.JdbcBackend$BaseSession.prepareStatement(JdbcBackend.scala:489)
+	at slick.jdbc.StatementInvoker.results(StatementInvoker.scala:33)
+	at slick.jdbc.StatementInvoker.iteratorTo(StatementInvoker.scala:22)
+	at slick.jdbc.Invoker.foreach(Invoker.scala:47)
+	at slick.jdbc.Invoker.foreach$(Invoker.scala:46)
+	at slick.jdbc.StatementInvoker.foreach(StatementInvoker.scala:16)
+	at slick.jdbc.Invoker.firstOption(Invoker.scala:23)
+	at slick.jdbc.Invoker.firstOption$(Invoker.scala:21)
+	at slick.jdbc.StatementInvoker.firstOption(StatementInvoker.scala:16)
+	at slick.jdbc.StreamingInvokerAction$HeadOptionAction.run(StreamingInvokerAction.scala:57)
+	at slick.jdbc.StreamingInvokerAction$HeadOptionAction.run(StreamingInvokerAction.scala:56)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.liftedTree1$1(BasicBackend.scala:276)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.run(BasicBackend.scala:276)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2021-09-26 21:36:25,949 [ERROR] from play.api.http.DefaultHttpErrorHandler in application-akka.actor.default-dispatcher-10 - 
+
+! @7l75ccc6h - Internal server error, for (POST) [/register] ->
+ 
+play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[SQLiteException: [SQLITE_ERROR] SQL error or missing database (table main.users has no column named name)]]
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:335)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:253)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:424)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:420)
+	at scala.concurrent.Future.$anonfun$recoverWith$1(Future.scala:417)
+	at scala.concurrent.impl.Promise.$anonfun$transformWith$1(Promise.scala:41)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:92)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:85)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:92)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:47)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:47)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+Caused by: org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (table main.users has no column named name)
+	at org.sqlite.core.DB.newSQLException(DB.java:941)
+	at org.sqlite.core.DB.newSQLException(DB.java:953)
+	at org.sqlite.core.DB.throwex(DB.java:918)
+	at org.sqlite.core.NativeDB.prepare_utf8(Native Method)
+	at org.sqlite.core.NativeDB.prepare(NativeDB.java:134)
+	at org.sqlite.core.DB.prepare(DB.java:257)
+	at org.sqlite.core.CorePreparedStatement.<init>(CorePreparedStatement.java:47)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.<init>(JDBC3PreparedStatement.java:30)
+	at org.sqlite.jdbc4.JDBC4PreparedStatement.<init>(JDBC4PreparedStatement.java:19)
+	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:35)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:241)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:205)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:311)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at slick.jdbc.JdbcBackend$SessionDef.prepareStatement(JdbcBackend.scala:375)
+	at slick.jdbc.JdbcBackend$SessionDef.prepareStatement$(JdbcBackend.scala:365)
+	at slick.jdbc.JdbcBackend$BaseSession.prepareStatement(JdbcBackend.scala:489)
+	at slick.jdbc.JdbcBackend$SessionDef.withPreparedStatement(JdbcBackend.scala:424)
+	at slick.jdbc.JdbcBackend$SessionDef.withPreparedStatement$(JdbcBackend.scala:420)
+	at slick.jdbc.JdbcBackend$BaseSession.withPreparedStatement(JdbcBackend.scala:489)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl.preparedInsert(JdbcActionComponent.scala:511)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$InsertOrUpdateAction.emulate(JdbcActionComponent.scala:600)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$InsertOrUpdateAction.f$1(JdbcActionComponent.scala:564)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$InsertOrUpdateAction.run(JdbcActionComponent.scala:569)
+	at slick.jdbc.JdbcActionComponent$SimpleJdbcProfileAction.run(JdbcActionComponent.scala:28)
+	at slick.jdbc.JdbcActionComponent$SimpleJdbcProfileAction.run(JdbcActionComponent.scala:25)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.liftedTree1$1(BasicBackend.scala:276)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.run(BasicBackend.scala:276)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2021-09-26 21:37:54,335 [WARN] from slick.basic.DatabaseConfig in play-dev-mode-akka.actor.default-dispatcher-53 - Use `profile` instead of `driver`. The latter is deprecated since Slick 3.2 and will be removed.
+2021-09-26 21:37:54,395 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-53 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.cors.CORSFilter
+    filters.ExampleFilter
+
+2021-09-26 21:37:54,397 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-53 - Application started (Dev) (no global state)
+2021-09-26 21:37:54,532 [ERROR] from play.api.http.DefaultHttpErrorHandler in application-akka.actor.default-dispatcher-8 - 
+
+! @7l75chd7j - Internal server error, for (POST) [/register] ->
+ 
+play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[SQLiteException: [SQLITE_ERROR] SQL error or missing database (table main.users has no column named age)]]
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:335)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:253)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:424)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:420)
+	at scala.concurrent.Future.$anonfun$recoverWith$1(Future.scala:417)
+	at scala.concurrent.impl.Promise.$anonfun$transformWith$1(Promise.scala:41)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:92)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:85)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:92)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:47)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:47)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+Caused by: org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (table main.users has no column named age)
+	at org.sqlite.core.DB.newSQLException(DB.java:941)
+	at org.sqlite.core.DB.newSQLException(DB.java:953)
+	at org.sqlite.core.DB.throwex(DB.java:918)
+	at org.sqlite.core.NativeDB.prepare_utf8(Native Method)
+	at org.sqlite.core.NativeDB.prepare(NativeDB.java:134)
+	at org.sqlite.core.DB.prepare(DB.java:257)
+	at org.sqlite.core.CorePreparedStatement.<init>(CorePreparedStatement.java:47)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.<init>(JDBC3PreparedStatement.java:30)
+	at org.sqlite.jdbc4.JDBC4PreparedStatement.<init>(JDBC4PreparedStatement.java:19)
+	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:35)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:241)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:205)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:311)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at slick.jdbc.JdbcBackend$SessionDef.prepareStatement(JdbcBackend.scala:375)
+	at slick.jdbc.JdbcBackend$SessionDef.prepareStatement$(JdbcBackend.scala:365)
+	at slick.jdbc.JdbcBackend$BaseSession.prepareStatement(JdbcBackend.scala:489)
+	at slick.jdbc.JdbcBackend$SessionDef.withPreparedStatement(JdbcBackend.scala:424)
+	at slick.jdbc.JdbcBackend$SessionDef.withPreparedStatement$(JdbcBackend.scala:420)
+	at slick.jdbc.JdbcBackend$BaseSession.withPreparedStatement(JdbcBackend.scala:489)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl.preparedInsert(JdbcActionComponent.scala:511)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$InsertOrUpdateAction.emulate(JdbcActionComponent.scala:600)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$InsertOrUpdateAction.f$1(JdbcActionComponent.scala:564)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$InsertOrUpdateAction.run(JdbcActionComponent.scala:569)
+	at slick.jdbc.JdbcActionComponent$SimpleJdbcProfileAction.run(JdbcActionComponent.scala:28)
+	at slick.jdbc.JdbcActionComponent$SimpleJdbcProfileAction.run(JdbcActionComponent.scala:25)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.liftedTree1$1(BasicBackend.scala:276)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.run(BasicBackend.scala:276)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2021-09-26 21:39:13,669 [ERROR] from play.api.http.DefaultHttpErrorHandler in application-akka.actor.default-dispatcher-9 - 
+
+! @7l75cm09c - Internal server error, for (POST) [/register] ->
+ 
+play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[SQLiteException: [SQLITE_CONSTRAINT]  Abort due to constraint violation (NOT NULL constraint failed: users.id)]]
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:335)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:253)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:424)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:420)
+	at scala.concurrent.Future.$anonfun$recoverWith$1(Future.scala:417)
+	at scala.concurrent.impl.Promise.$anonfun$transformWith$1(Promise.scala:41)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:92)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:85)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:92)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:47)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:47)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+Caused by: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT]  Abort due to constraint violation (NOT NULL constraint failed: users.id)
+	at org.sqlite.core.DB.newSQLException(DB.java:941)
+	at org.sqlite.core.DB.newSQLException(DB.java:953)
+	at org.sqlite.core.DB.execute(DB.java:854)
+	at org.sqlite.core.DB.executeUpdate(DB.java:895)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:102)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$InsertOrUpdateAction.$anonfun$emulate$3(JdbcActionComponent.scala:603)
+	at slick.jdbc.JdbcBackend$SessionDef.withPreparedStatement(JdbcBackend.scala:425)
+	at slick.jdbc.JdbcBackend$SessionDef.withPreparedStatement$(JdbcBackend.scala:420)
+	at slick.jdbc.JdbcBackend$BaseSession.withPreparedStatement(JdbcBackend.scala:489)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl.preparedInsert(JdbcActionComponent.scala:511)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$InsertOrUpdateAction.emulate(JdbcActionComponent.scala:600)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$InsertOrUpdateAction.f$1(JdbcActionComponent.scala:564)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$InsertOrUpdateAction.run(JdbcActionComponent.scala:569)
+	at slick.jdbc.JdbcActionComponent$SimpleJdbcProfileAction.run(JdbcActionComponent.scala:28)
+	at slick.jdbc.JdbcActionComponent$SimpleJdbcProfileAction.run(JdbcActionComponent.scala:25)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.liftedTree1$1(BasicBackend.scala:276)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.run(BasicBackend.scala:276)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
