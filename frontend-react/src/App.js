@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import NavBar from './components/NavBar';
-import Store from './components/Store';
+import Routing from './components/Routing';
 import { UserContextProvider } from "./contexts/UserContext";
 
 import './store.scss';
@@ -12,7 +12,7 @@ function App() {
       <UserContextProvider>
         <Router>
           <NavBar />
-          <Store />
+          <Routing />
         </Router>
       </UserContextProvider>
     </div>

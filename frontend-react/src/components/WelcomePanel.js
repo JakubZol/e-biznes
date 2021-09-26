@@ -1,9 +1,9 @@
 import React from 'react';
 
 
-const WelcomePanel = ({ currentUser }) => (
+const WelcomePanel = ({ user }) => (
     <div className="store__welcome">
-        <h1>Witaj {currentUser && `${currentUser.firstname} ${currentUser.lastname}`}!</h1>
+        <h1>Witaj {user && `${user.firstname} ${user.lastname}`}!</h1>
         Zapraszamy do naszego sklepu.
     </div>
 );

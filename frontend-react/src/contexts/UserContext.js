@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import useFetch from "../hooks/useFetch";
 
-const defaultValue = {
-    users: []
-};
-
-export const UserContext = React.createContext(defaultValue);
+export const UserContext = React.createContext();
 
 
 export const UserContextProvider = ({ children }) => {
-    const { data: users } = useFetch(`http://localhost:9000/users`);
+    const [ userToken, setUserToken ] = useState(localStorage.getItem('authToken'));
+
+    const { data: user } = useFetch(`http://localhost:9000/users`, [userToken], { 'X-Auth': userToken });
 
     const providerValue = {
-        users,
+        user,
+        setUserToken,
     };
 
     return (
