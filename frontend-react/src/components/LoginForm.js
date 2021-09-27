@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Form, Button } from "react-bootstrap";
 import UserContext from "../contexts/UserContext";
 import axios from 'axios';
+import {API_URL} from "../consts";
 
 const LoginForm = () => {
     const [login, setLogin] = useState();
@@ -12,7 +13,7 @@ const LoginForm = () => {
     const onFormSubmit = async () => {
         await axios({
             method: 'post',
-            url: 'http://localhost:9000/login',
+            url: `${API_URL}/login`,
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',

@@ -2,12 +2,13 @@ import React from 'react';
 import Product from "./Product";
 import useFetch from '../hooks/useFetch';
 import {FETCH_STATUSES, PRODUCT_CATEGORIES} from "../consts";
+import { API_URL } from "../consts";
 
 
 const ProductsPanel = ({ match, addItem }) => {
     const product = PRODUCT_CATEGORIES.find(({ productType }) => productType === match.params.category.toUpperCase());
 
-    const { data: productsList, status } = useFetch(`http://localhost:9000${product?.url}`, [product]);
+    const { data: productsList, status } = useFetch(`${API_URL}${product?.url}`, [product]);
 
     return (
         <div className="store__main">

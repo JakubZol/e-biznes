@@ -1,4 +1,3 @@
-import { PRODUCT_CATEGORIES } from "../consts";
 import React, { useContext } from "react";
 import { Route } from 'react-router-dom';
 import ProductsPanel from "./ProductsPanel";

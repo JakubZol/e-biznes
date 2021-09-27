@@ -14,3 +14,9 @@ export const FETCH_STATUSES = {
     SUCCESS: 'SUCCESS',
     FAILURE: 'FAILURE',
 };
+
+const LOCAL_API = "http://localhost:9000";
+
+const SERVER_API = "https://ebiznes-backend-scala.azurewebsites.net";
+
+export const API_URL = SERVER_API;
