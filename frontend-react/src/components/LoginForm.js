@@ -9,45 +9,47 @@ const LoginForm = () => {
 
     const { setUserToken } = useContext(UserContext);
 
+    const onFormSubmit = async () => {
+        await axios({
+            method: 'post',
+            url: 'http://localhost:9000/login',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            data: {
+                login,
+                password,
+            }
+        }).then((response) => {
+            if (response.status === 200) {
+                setUserToken(response.headers['x-auth']);
+                localStorage.setItem("authToken", response.headers['x-auth']);
+            }
+        }).catch((error) => {
+            console.log(error)
+        });
+    };
+
     return (
         <Form onSubmit={(event => {
             event.preventDefault()
-        })} id="loginForm">
-            <Form.Group className="mb-3" controlId="formBasicLogin">
+        })} id="login-form">
+            <Form.Group className="mb-3" controlId="login-form-login">
                 <Form.Label>Login: </Form.Label>
                 <Form.Control type="text" placeholder="Enter login"
                               onChange={(event) => {
                                   setLogin(event.target.value)
                               }}/>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3" controlId="login-form-password">
                 <Form.Label>Hasło: </Form.Label>
                 <Form.Control type="password" placeholder="Password"
                               onChange={(event) => {
                                   setPassword(event.target.value)
                               }}/>
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={async () => {
-                await axios({
-                    method: 'post',
-                    url: 'http://localhost:9000/login',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                    },
-                    data: {
-                        login,
-                        password,
-                    }
-                }).then((response) => {
-                    if (response.status === 200) {
-                        setUserToken(response.headers['x-auth']);
-                        localStorage.setItem("authToken", response.headers['x-auth']);
-                    }
-                }).catch((error) => {
-                    console.log(error)
-                });
-            }}>
+            <Button variant="primary" type="submit" onClick={onFormSubmit}>
                 Zaloguj
             </Button>
         </Form>

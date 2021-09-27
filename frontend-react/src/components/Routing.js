@@ -16,7 +16,7 @@ const Routing = () => {
             <Redirect exact from="/" to="/login" />
             <ProtectedRoute path="/login" component={LoginForm} isAuthenticated={isAuthenticated} authenticationRequired={false}/>
             <ProtectedRoute path="/register" component={RegisterForm} isAuthenticated={isAuthenticated} authenticationRequired={false}/>
-            <ProtectedRoute path="/store" component={Store} isAuthenticated={isAuthenticated} authenticationRequired/>
+            <ProtectedRoute path="/store" component={Store} isAuthenticated={isAuthenticated} authenticationRequired exact={false}/>
             <Route component={() => <div>NO CONTENT</div>} />
         </Switch>
     )
