@@ -4,7 +4,7 @@ import NavBar from './components/NavBar';
 import Routing from './components/Routing';
 import { UserContextProvider } from "./contexts/UserContext";
 
-import './store.scss';
+import './forms.scss';
 
 function App() {
   return (
