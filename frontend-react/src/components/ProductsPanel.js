@@ -1,8 +1,7 @@
 import React from 'react';
 import Product from "./Product";
 import useFetch from '../hooks/useFetch';
-import {FETCH_STATUSES, PRODUCT_CATEGORIES} from "../consts";
-import { API_URL } from "../consts";
+import {FETCH_STATUSES, PRODUCT_CATEGORIES, API_URL} from "../consts";
 
 
 const ProductsPanel = ({ match, addItem }) => {
