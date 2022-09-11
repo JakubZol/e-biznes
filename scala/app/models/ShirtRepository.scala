@@ -30,7 +30,7 @@ class ShirtRepository  @Inject() (dbConfigProvider: DatabaseConfigProvider)(impl
     (shirt.map(a => (a.name, a.productType, a.size, a.brand, a.price))
       returning shirt.map(_.id)
       into {case ((name, productType, size, brand, price), id) => Shirt(id, name, productType, size, brand, price)}
-      ) += (name, productType, size, brand, price)
+      ) += ((name, productType, size, brand, price))
   }
 
   def list(): Future[Seq[Shirt]] = db.run {

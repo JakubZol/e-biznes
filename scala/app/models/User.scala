@@ -1,12 +1,43 @@
 package models
 
-import com.mohiva.play.silhouette.api.util.PasswordInfo
+import java.util.UUID
+
 import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
-import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
-import com.mohiva.play.silhouette.password.BCryptSha256PasswordHasher
 
-case class User (id: Option[Long], firstname: String, lastname: String, login: String, age:Int, password: Option[String] = None) extends Identity {
-  def loginInfo = LoginInfo(CredentialsProvider.ID, login)
+/**
+ * The user object.
+ *
+ * @param userID The unique ID of the user.
+ * @param loginInfo The linked login info.
+ * @param firstName Maybe the first name of the authenticated user.
+ * @param lastName Maybe the last name of the authenticated user.
+ * @param fullName Maybe the full name of the authenticated user.
+ * @param email Maybe the email of the authenticated provider.
+ * @param avatarURL Maybe the avatar URL of the authenticated provider.
+ * @param activated Indicates that the user has activated its registration.
+ */
+case class User(
+                 userID: UUID,
+                 loginInfo: LoginInfo,
+                 firstName: Option[String],
+                 lastName: Option[String],
+                 fullName: Option[String],
+                 email: Option[String],
+                 avatarURL: Option[String],
+                 face: Array[Byte],
+                 activated: Boolean) extends Identity {
 
-  def passwordInfo = PasswordInfo(BCryptSha256PasswordHasher.ID, password.get)
+  /**
+   * Tries to construct a name.
+   *
+   * @return Maybe a name.
+   */
+  def name = fullName.orElse {
+    firstName -> lastName match {
+      case (Some(f), Some(l)) => Some(f + " " + l)
+      case (Some(f), None) => Some(f)
+      case (None, Some(l)) => Some(l)
+      case _ => None
+    }
+  }
 }

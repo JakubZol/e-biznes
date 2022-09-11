@@ -1,64 +1,44 @@
+GET           /service/balls                       controllers.BallsController.getBalls
+POST          /service/balls                     controllers.BallsController.addBall
+PUT         /service/balls/:id              controllers.BallsController.updateBall(id: Long)
+DELETE        /service/balls/:id                   controllers.BallsController.delete(id: Long)
 
-# Routes
-# This file defines all application routes (Higher priority routes first)
-# ~~~~
+GET           /service/gloves                       controllers.GlovesController.getGloves
+POST          /service/gloves                     controllers.GlovesController.addGloves
+PUT          /service/gloves/:id              controllers.GlovesController.updateGloves(id: Long)
+DELETE        /service/gloves/:id                   controllers.GlovesController.delete(id: Long)
 
-POST          /register                   controllers.AuthController.signUp
-POST          /login                      controllers.AuthController.signIn
-GET            /users                       controllers.UserController.getUser
+GET           /service/hats                       controllers.HatsController.getHats
+POST          /service/hats                    controllers.HatsController.addHat
+PUT          /service/hats/:id              controllers.HatsController.updateHat(id: Long)
+DELETE        /service/hats/:id                   controllers.HatsController.delete(id: Long)
 
-GET           /                           controllers.HomeController.index
-GET           /addproduct                 controllers.HomeController.addProduct
-POST          /addproducthandle           controllers.HomeController.addProductHandle
-GET           /updateproduct/:id          controllers.HomeController.updateProduct(id: Long)
-POST          /updateproducthandle        controllers.HomeController.updateProductHandle
+GET           /service/helmets                     controllers.HelmetsController.getHelmets
+POST          /service/helmets                 controllers.HelmetsController.addHelmet
+PUT          /service/helmets/:id            controllers.HelmetsController.updateHelmet(id: Long)
+DELETE        /service/helmets/:id                 controllers.HelmetsController.delete(id: Long)
 
-GET           /products                   controllers.HomeController.getProducts
-GET           /product/:id                controllers.HomeController.getProduct(id: Long)
-GET           /deleteproduct/:id          controllers.HomeController.delete(id: Long)
+GET           /service/shirts                    controllers.ShirtsController.getShirts
+POST          /service/shirts                 controllers.ShirtsController.addShirt
+PUT         /service/shirts/:id           controllers.ShirtsController.updateShirt(id: Long)
+DELETE        /service/shirts/:id                controllers.ShirtsController.delete(id: Long)
 
-GET           /count                      controllers.CountController.count
+GET           /service/shoes                       controllers.ShoesController.getShoes
+POST          /service/shoes                     controllers.ShoesController.addShoes
+PUT        /service/shoes/:id              controllers.ShoesController.updateShoes(id: Long)
+DELETE        /service/shoes/:id                   controllers.ShoesController.delete(id: Long)
 
-GET           /message                    controllers.AsyncController.message
+GET           /service/sweatbands                   controllers.SweatbandsController.getSweatbands
+POST          /service/sweatbands                 controllers.SweatbandsController.addSweatband
+PUT          /service/sweatbands/:id          controllers.SweatbandsController.updateSweatband(id: Long)
+DELETE        /service/sweatbands/:id               controllers.SweatbandsController.delete(id: Long)
 
-GET           /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET           /service/trousers                    controllers.TrousersController.getTrousers
+POST          /service/trousers                  controllers.TrousersController.addTrousers
+PUT        /service/trousers/:id           controllers.TrousersController.updateTrousers(id: Long)
+DELETE        /service/trousers/:id                controllers.TrousersController.delete(id: Long)
 
-GET           /balls                       controllers.BallsController.getBalls
-POST          /balls                     controllers.BallsController.addBall
-PUT         /balls/:id              controllers.BallsController.updateBall(id: Long)
-DELETE        /balls/:id                   controllers.BallsController.delete(id: Long)
-
-GET           /gloves                       controllers.GlovesController.getGloves
-POST          /gloves                     controllers.GlovesController.addGloves
-PUT          /gloves/:id              controllers.GlovesController.updateGloves(id: Long)
-DELETE        /gloves/:id                   controllers.GlovesController.delete(id: Long)
-
-GET           /hats                       controllers.HatsController.getHats
-POST          /hats                    controllers.HatsController.addHat
-PUT          /hats/:id              controllers.HatsController.updateHat(id: Long)
-DELETE        /hats/:id                   controllers.HatsController.delete(id: Long)
-
-GET           /helmets                     controllers.HelmetsController.getHelmets
-POST          /helmets                 controllers.HelmetsController.addHelmet
-PUT          /helmets/:id            controllers.HelmetsController.updateHelmet(id: Long)
-DELETE        /helmets/:id                 controllers.HelmetsController.delete(id: Long)
-
-GET           /shirts                    controllers.ShirtsController.getShirts
-POST          /shirts                 controllers.ShirtsController.addShirt
-PUT         /shirts/:id           controllers.ShirtsController.updateShirt(id: Long)
-DELETE        /shirts/:id                controllers.ShirtsController.delete(id: Long)
-
-GET           /shoes                       controllers.ShoesController.getShoes
-POST          /shoes                     controllers.ShoesController.addShoes
-PUT        /shoes/:id              controllers.ShoesController.updateShoes(id: Long)
-DELETE        /shoes/:id                   controllers.ShoesController.delete(id: Long)
-
-GET           /sweatbands                   controllers.SweatbandsController.getSweatbands
-POST          /sweatbands                 controllers.SweatbandsController.addSweatband
-PUT          /sweatbands/:id          controllers.SweatbandsController.updateSweatband(id: Long)
-DELETE        /sweatbands/:id               controllers.SweatbandsController.delete(id: Long)
-
-GET           /trousers                    controllers.TrousersController.getTrousers
-POST          /trousers                  controllers.TrousersController.addTrousers
-PUT        /trousers/:id           controllers.TrousersController.updateTrousers(id: Long)
-DELETE        /trousers/:id                controllers.TrousersController.delete(id: Long)
+GET         /                                controllers.ApplicationController.index()
+GET           /service/signout                    controllers.ApplicationController.signOut
+GET           /service/authenticate/facebook      controllers.SocialAuthController.authenticate
+GET           /*file               controllers.ApplicationController.assetOrDefault(file)
