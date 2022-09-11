@@ -23,14 +23,6 @@ CREATE TABLE "product" (
                            FOREIGN KEY(category) references category(id)
 );
 
-CREATE TABLE "user" (
-                        "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                        "firstname" VARCHAR NOT NULL,
-                        "lastname" VARCHAR NOT NULL,
-                        "login" VARCHAR NOT NULL,
-                        "age" INT NOT NULL
-);
-
 CREATE TABLE "ball"
 (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,

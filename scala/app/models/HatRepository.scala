@@ -29,7 +29,7 @@ class HatRepository  @Inject() (dbConfigProvider: DatabaseConfigProvider)(implic
     (hat.map(a => (a.name, a.productType, a.brand, a.price))
     returning hat.map(_.id)
     into {case ((name, productType, brand, price), id) => Hat(id, name, productType, brand, price)}
-    ) += (name, productType, brand, price)
+    ) += ((name, productType, brand, price))
   }
 
   def list(): Future[Seq[Hat]] = db.run {

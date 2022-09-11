@@ -29,7 +29,7 @@ class BallRepository  @Inject() (dbConfigProvider: DatabaseConfigProvider)(impli
     (ball.map(a => (a.name, a.productType, a.brand, a.price))
     returning ball.map(_.id)
     into {case ((name, productType, brand, price), id) => Ball(id, name, productType, brand, price)}
-    ) += (name, productType, brand, price)
+    ) += ((name, productType, brand, price))
   }
 
   def list(): Future[Seq[Ball]] = db.run {

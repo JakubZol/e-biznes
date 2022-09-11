@@ -29,7 +29,7 @@ class SweatbandRepository  @Inject() (dbConfigProvider: DatabaseConfigProvider)(
     (sweatband.map(a => (a.name, a.productType, a.brand, a.price))
     returning sweatband.map(_.id)
     into {case ((name, productType, brand, price), id) => Sweatband(id, name, productType, brand, price)}
-    ) += (name, productType, brand, price)
+    ) += ((name, productType, brand, price))
   }
 
   def list(): Future[Seq[Sweatband]] = db.run {

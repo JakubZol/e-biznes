@@ -30,7 +30,7 @@ class HelmetRepository  @Inject() (dbConfigProvider: DatabaseConfigProvider)(imp
     (helmet.map(a => (a.name, a.productType, a.size, a.brand, a.price))
     returning helmet.map(_.id)
     into {case ((name, productType, size, brand, price), id) => Helmet(id, name, productType, size, brand, price)}
-    ) += (name, productType, size, brand, price)
+    ) += ((name, productType, size, brand, price))
   }
 
   def list(): Future[Seq[Helmet]] = db.run {
