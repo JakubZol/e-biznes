@@ -1,5 +1,6 @@
 package controllers
 
+import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import models.{Trousers, TrousersRepository}
 
 import javax.inject.{Inject, Singleton}
@@ -11,7 +12,7 @@ import play.api.mvc._
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class TrousersController @Inject()(trousersRepository: TrousersRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
+class TrousersController @Inject()(trousersRepository: TrousersRepository, scc: SilhouetteControllerComponents)(implicit ec: ExecutionContext) extends SilhouetteController(scc) {
 
   val createTrousersForm: Form[CreateTrousersForm] = Form {
     mapping(
@@ -34,7 +35,7 @@ class TrousersController @Inject()(trousersRepository: TrousersRepository, cc: M
     )(UpdateTrousersForm.apply)(UpdateTrousersForm.unapply)
   }
 
-  def addTrousers: Action[AnyContent] = Action.async { implicit request =>
+  def addTrousers = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     createTrousersForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -49,13 +50,13 @@ class TrousersController @Inject()(trousersRepository: TrousersRepository, cc: M
     )
   }
 
-  def getTrousers: Action[AnyContent] = Action.async { implicit request =>
+  def getTrousers =  SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     trousersRepository.list().map {
       trousers => Ok(Json.toJson(trousers))
     }
   }
 
-  def updateTrousers(id: Long): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
+  def updateTrousers(id: Long) = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     updateTrousersForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -70,7 +71,7 @@ class TrousersController @Inject()(trousersRepository: TrousersRepository, cc: M
     )
   }
 
-  def delete(id: Long): Action[AnyContent] = Action {
+  def delete(id: Long): Action[AnyContent] = SecuredAction {
     trousersRepository.delete(id)
     Redirect("/trousers")
   }

@@ -1,5 +1,6 @@
 package controllers
 
+import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import models.{Helmet, HelmetRepository}
 
 import javax.inject.{Inject, Singleton}
@@ -11,7 +12,7 @@ import play.api.mvc._
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class HelmetsController @Inject()(helmetsRepository: HelmetRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
+class HelmetsController @Inject()(helmetsRepository: HelmetRepository, scc: SilhouetteControllerComponents)(implicit ec: ExecutionContext) extends SilhouetteController(scc) {
 
   val createHelmetForm: Form[CreateHelmetForm] = Form {
     mapping(
@@ -34,7 +35,7 @@ class HelmetsController @Inject()(helmetsRepository: HelmetRepository, cc: Messa
     )(UpdateHelmetForm.apply)(UpdateHelmetForm.unapply)
   }
 
-  def addHelmet: Action[AnyContent] = Action.async { implicit request =>
+  def addHelmet = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     createHelmetForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -49,13 +50,13 @@ class HelmetsController @Inject()(helmetsRepository: HelmetRepository, cc: Messa
     )
   }
 
-  def getHelmets: Action[AnyContent] = Action.async { implicit request =>
+  def getHelmets = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     helmetsRepository.list().map {
       helmet => Ok(Json.toJson(helmet))
     }
   }
 
-  def updateHelmet(id: Long): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
+  def updateHelmet(id: Long) = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     updateHelmetForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -70,7 +71,7 @@ class HelmetsController @Inject()(helmetsRepository: HelmetRepository, cc: Messa
     )
   }
 
-  def delete(id: Long): Action[AnyContent] = Action {
+  def delete(id: Long): Action[AnyContent] = SecuredAction {
     helmetsRepository.delete(id)
     Redirect("/helmets")
   }

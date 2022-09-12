@@ -1,5 +1,6 @@
 package controllers
 
+import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import models.{Sweatband, SweatbandRepository}
 
 import javax.inject.{Inject, Singleton}
@@ -11,7 +12,7 @@ import play.api.mvc._
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class SweatbandsController @Inject()(sweatbandsRepository: SweatbandRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
+class SweatbandsController @Inject()(sweatbandsRepository: SweatbandRepository, scc: SilhouetteControllerComponents)(implicit ec: ExecutionContext) extends SilhouetteController(scc) {
 
   val createSweatbandForm: Form[CreateSweatbandForm] = Form {
     mapping(
@@ -32,7 +33,7 @@ class SweatbandsController @Inject()(sweatbandsRepository: SweatbandRepository, 
     )(UpdateSweatbandForm.apply)(UpdateSweatbandForm.unapply)
   }
 
-  def addSweatband: Action[AnyContent] = Action.async { implicit request =>
+  def addSweatband = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     createSweatbandForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -47,13 +48,13 @@ class SweatbandsController @Inject()(sweatbandsRepository: SweatbandRepository, 
     )
   }
 
-  def getSweatbands: Action[AnyContent] = Action.async { implicit request =>
+  def getSweatbands = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     sweatbandsRepository.list().map {
       sweatband => Ok(Json.toJson(sweatband))
     }
   }
 
-  def updateSweatband(id: Long): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
+  def updateSweatband(id: Long) = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     updateSweatbandForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -68,7 +69,7 @@ class SweatbandsController @Inject()(sweatbandsRepository: SweatbandRepository, 
     )
   }
 
-  def delete(id: Long): Action[AnyContent] = Action {
+  def delete(id: Long): Action[AnyContent] = SecuredAction {
     sweatbandsRepository.delete(id)
     Redirect("/sweatbands")
   }

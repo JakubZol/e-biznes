@@ -1,5 +1,6 @@
 package controllers
 
+import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import models.{Gloves, GlovesRepository}
 
 import javax.inject.{Inject, Singleton}
@@ -11,7 +12,7 @@ import play.api.mvc._
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class GlovesController @Inject()(glovesRepository: GlovesRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
+class GlovesController @Inject()(glovesRepository: GlovesRepository, scc: SilhouetteControllerComponents)(implicit ec: ExecutionContext) extends SilhouetteController(scc) {
 
   val createGlovesForm: Form[CreateGlovesForm] = Form {
     mapping(
@@ -34,7 +35,7 @@ class GlovesController @Inject()(glovesRepository: GlovesRepository, cc: Message
     )(UpdateGlovesForm.apply)(UpdateGlovesForm.unapply)
   }
 
-  def addGloves: Action[AnyContent] = Action.async { implicit request =>
+  def addGloves = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     createGlovesForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -49,13 +50,13 @@ class GlovesController @Inject()(glovesRepository: GlovesRepository, cc: Message
     )
   }
 
-  def getGloves: Action[AnyContent] = Action.async { implicit request =>
+  def getGloves = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     glovesRepository.list().map {
       gloves => Ok(Json.toJson(gloves))
     }
   }
 
-  def updateGloves(id: Long): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
+  def updateGloves(id: Long) = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     updateGlovesForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -70,7 +71,7 @@ class GlovesController @Inject()(glovesRepository: GlovesRepository, cc: Message
     )
   }
 
-  def delete(id: Long): Action[AnyContent] = Action {
+  def delete(id: Long): Action[AnyContent] = SecuredAction {
     glovesRepository.delete(id)
     Redirect("/gloves")
   }
