@@ -1,5 +1,6 @@
 package controllers
 
+import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import models.{Ball, BallRepository}
 
 import javax.inject.{Inject, Singleton}
@@ -11,7 +12,7 @@ import play.api.mvc._
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class BallsController @Inject()(ballsRepository: BallRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
+class BallsController @Inject()(ballsRepository: BallRepository, scc: SilhouetteControllerComponents)(implicit ec: ExecutionContext) extends SilhouetteController(scc) {
 
   val createBallForm: Form[CreateBallForm] = Form {
     mapping(
@@ -32,7 +33,7 @@ class BallsController @Inject()(ballsRepository: BallRepository, cc: MessagesCon
     )(UpdateBallForm.apply)(UpdateBallForm.unapply)
   }
 
-  def addBall: Action[AnyContent] = Action.async { implicit request =>
+  def addBall = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     createBallForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -47,13 +48,13 @@ class BallsController @Inject()(ballsRepository: BallRepository, cc: MessagesCon
     )
   }
 
-  def getBalls: Action[AnyContent] = Action.async { implicit request =>
+  def getBalls = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     ballsRepository.list().map {
       ball => Ok(Json.toJson(ball))
     }
   }
 
-  def updateBall(id: Long): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
+  def updateBall(id: Long) = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     updateBallForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -68,7 +69,7 @@ class BallsController @Inject()(ballsRepository: BallRepository, cc: MessagesCon
     )
   }
 
-  def delete(id: Long): Action[AnyContent] = Action {
+  def delete(id: Long): Action[AnyContent] = SecuredAction {
     ballsRepository.delete(id)
     Redirect("/balls")
   }

@@ -1,5 +1,6 @@
 package controllers
 
+import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import models.{Shoes, ShoesRepository}
 
 import javax.inject.{Inject, Singleton}
@@ -11,7 +12,7 @@ import play.api.mvc._
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class ShoesController @Inject()(shoesRepository: ShoesRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
+class ShoesController @Inject()(shoesRepository: ShoesRepository, scc: SilhouetteControllerComponents)(implicit ec: ExecutionContext) extends SilhouetteController(scc) {
 
   val createShoesForm: Form[CreateShoesForm] = Form {
     mapping(
@@ -34,7 +35,7 @@ class ShoesController @Inject()(shoesRepository: ShoesRepository, cc: MessagesCo
     )(UpdateShoesForm.apply)(UpdateShoesForm.unapply)
   }
 
-  def addShoes: Action[AnyContent] = Action.async { implicit request =>
+  def addShoes = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     createShoesForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -49,13 +50,13 @@ class ShoesController @Inject()(shoesRepository: ShoesRepository, cc: MessagesCo
     )
   }
 
-  def getShoes: Action[AnyContent] = Action.async { implicit request =>
+  def getShoes = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     shoesRepository.list().map {
       shoes => Ok(Json.toJson(shoes))
     }
   }
 
-  def updateShoes(id: Long): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
+  def updateShoes(id: Long) = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     updateShoesForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -70,7 +71,7 @@ class ShoesController @Inject()(shoesRepository: ShoesRepository, cc: MessagesCo
     )
   }
 
-  def delete(id: Long): Action[AnyContent] = Action {
+  def delete(id: Long): Action[AnyContent] = SecuredAction {
     shoesRepository.delete(id)
     Redirect("/shoes")
   }

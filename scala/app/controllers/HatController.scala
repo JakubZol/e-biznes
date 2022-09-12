@@ -1,5 +1,6 @@
 package controllers
 
+
 import models.{Hat, HatRepository}
 
 import javax.inject.{Inject, Singleton}
@@ -7,11 +8,12 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.libs.json.Json
 import play.api.mvc._
+import com.mohiva.play.silhouette.api.actions.SecuredRequest
 
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class HatsController @Inject()(hatsRepository: HatRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
+class HatsController @Inject()(hatsRepository: HatRepository, scc: SilhouetteControllerComponents)(implicit ec: ExecutionContext) extends SilhouetteController(scc) {
 
   val createHatForm: Form[CreateHatForm] = Form {
     mapping(
@@ -32,7 +34,7 @@ class HatsController @Inject()(hatsRepository: HatRepository, cc: MessagesContro
     )(UpdateHatForm.apply)(UpdateHatForm.unapply)
   }
 
-  def addHat: Action[AnyContent] = Action.async { implicit request =>
+  def addHat = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     createHatForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -47,13 +49,13 @@ class HatsController @Inject()(hatsRepository: HatRepository, cc: MessagesContro
     )
   }
 
-  def getHats: Action[AnyContent] = Action.async { implicit request =>
+  def getHats = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     hatsRepository.list().map {
       hat => Ok(Json.toJson(hat))
     }
   }
 
-  def updateHat(id: Long): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
+  def updateHat(id: Long) = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     updateHatForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -68,7 +70,7 @@ class HatsController @Inject()(hatsRepository: HatRepository, cc: MessagesContro
     )
   }
 
-  def delete(id: Long): Action[AnyContent] = Action {
+  def delete(id: Long): Action[AnyContent] = SecuredAction {
     hatsRepository.delete(id)
     Redirect("/hats")
   }

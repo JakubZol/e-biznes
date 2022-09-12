@@ -1,5 +1,6 @@
 package controllers
 
+import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import models.{Shirt, ShirtRepository}
 
 import javax.inject.{Inject, Singleton}
@@ -11,7 +12,7 @@ import play.api.mvc._
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class ShirtsController @Inject()(shirtsRepository: ShirtRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
+class ShirtsController @Inject()(shirtsRepository: ShirtRepository, scc: SilhouetteControllerComponents)(implicit ec: ExecutionContext) extends SilhouetteController(scc) {
 
   val createShirtForm: Form[CreateShirtForm] = Form {
     mapping(
@@ -34,7 +35,7 @@ class ShirtsController @Inject()(shirtsRepository: ShirtRepository, cc: Messages
     )(UpdateShirtForm.apply)(UpdateShirtForm.unapply)
   }
 
-  def addShirt: Action[AnyContent] = Action.async { implicit request =>
+  def addShirt = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     createShirtForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -49,13 +50,13 @@ class ShirtsController @Inject()(shirtsRepository: ShirtRepository, cc: Messages
     )
   }
 
-  def getShirts: Action[AnyContent] = Action.async { implicit request =>
+  def getShirts = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     shirtsRepository.list().map {
       shirt => Ok(Json.toJson(shirt))
     }
   }
 
-  def updateShirt(id: Long): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
+  def updateShirt(id: Long) = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     updateShirtForm.bindFromRequest().fold(
       errorForm => {
         Future.successful(
@@ -70,7 +71,7 @@ class ShirtsController @Inject()(shirtsRepository: ShirtRepository, cc: Messages
     )
   }
 
-  def delete(id: Long): Action[AnyContent] = Action {
+  def delete(id: Long): Action[AnyContent] = SecuredAction {
     shirtsRepository.delete(id)
     Redirect("/shirts")
   }
